@@ -1,1 +1,1 @@
-io.github.palmurugan.kafkaguard.jdbc.KafkaGuardJdbcAutoConfiguration
+io.github.palmurugan.kafkaguard.jdbc.autoconfigure.KafkaGuardJdbcAutoConfiguration

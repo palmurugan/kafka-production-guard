@@ -1,1 +1,1 @@
-io.github.palmurugan.kafkaguard.spring.KafkaGuardAutoConfiguration
+io.github.palmurugan.kafkaguard.spring.autoconfigure.KafkaGuardAutoConfiguration

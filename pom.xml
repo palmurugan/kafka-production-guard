@@ -40,6 +40,7 @@
     <module>kafka-production-guard-core</module>
     <module>kafka-production-guard-spring-boot-starter</module>
     <module>kafka-production-guard-jdbc</module>
+    <module>kafka-production-guard-redis</module>
   </modules>
 
   <properties>
@@ -48,6 +49,8 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <!-- Bump to the latest 3.5.x patch -->
     <spring-boot.version>3.5.6</spring-boot.version>
+    <!-- Verify against the latest patch compatible with the spring-boot.version above -->
+    <testcontainers.version>1.20.4</testcontainers.version>
   </properties>
 
   <dependencyManagement>
@@ -60,8 +63,25 @@
         <scope>import</scope>
       </dependency>
       <dependency>
+        <groupId>org.testcontainers</groupId>
+        <artifactId>testcontainers-bom</artifactId>
+        <version>${testcontainers.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
         <groupId>io.github.palmurugan</groupId>
         <artifactId>kafka-production-guard-core</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.github.palmurugan</groupId>
+        <artifactId>kafka-production-guard-jdbc</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.github.palmurugan</groupId>
+        <artifactId>kafka-production-guard-redis</artifactId>
         <version>${project.version}</version>
       </dependency>
     </dependencies>
@@ -83,6 +103,20 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-surefire-plugin</artifactId>
           <version>3.5.2</version>
+        </plugin>
+        <!-- Runs *IT classes (Testcontainers/Docker-based) during `mvn verify`, not `mvn test` -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-failsafe-plugin</artifactId>
+          <version>3.5.2</version>
+          <executions>
+            <execution>
+              <goals>
+                <goal>integration-test</goal>
+                <goal>verify</goal>
+              </goals>
+            </execution>
+          </executions>
         </plugin>
       </plugins>
     </pluginManagement>
