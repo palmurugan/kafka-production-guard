@@ -10,10 +10,13 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.redis.core.StringRedisTemplate;
 
-@AutoConfiguration(beforeName = {
+@AutoConfiguration(
+        after = RedisAutoConfiguration.class,
+        beforeName = {
         "io.github.palmurugan.kafkaguard.jdbc.autoconfigure.KafkaGuardJdbcAutoConfiguration",
         "io.github.palmurugan.kafkaguard.spring.autoconfigure.KafkaGuardAutoConfiguration"})
 @ConditionalOnClass(StringRedisTemplate.class)
