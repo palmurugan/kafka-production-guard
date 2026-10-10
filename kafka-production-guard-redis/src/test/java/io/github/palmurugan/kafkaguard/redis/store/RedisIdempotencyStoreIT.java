@@ -29,7 +29,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * Proves the Lua-script-based claim/release semantics of {@link RedisIdempotencyStore} against a
  * real Redis server (not a mock), including the concurrent-claim atomicity guarantee.
  */
-@Testcontainers
+@Testcontainers(disabledWithoutDocker = true)
 class RedisIdempotencyStoreIT {
 
     private static final String PREFIX = "test:idempotency:";

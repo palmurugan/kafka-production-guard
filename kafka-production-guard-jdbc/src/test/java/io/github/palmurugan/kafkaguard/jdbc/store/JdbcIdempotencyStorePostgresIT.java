@@ -28,7 +28,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * the root {@code scripts.sql}. No Postgres-specific code exists in {@link JdbcIdempotencyStore};
  * this test validates the generic implementation, not a dialect-specific one.
  */
-@Testcontainers
+@Testcontainers(disabledWithoutDocker = true)
 class JdbcIdempotencyStorePostgresIT {
 
     private static final String TABLE = "kafka_guard_idempotency";
